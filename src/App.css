@@ -1,0 +1,407 @@
+/* =============================================
+   App.css - All styles for the Supermarket App
+   ============================================= */
+
+/* --- Google Font Import --- */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+/* --- CSS Variables (easy to change colors in one place) --- */
+:root {
+  --color-bg: #f0f4f8;
+  --color-white: #ffffff;
+  --color-border: #dde3ea;
+
+  --color-primary: #1a6b3a;
+  --color-primary-light: #e8f5ee;
+  --color-primary-hover: #145530;
+
+  --color-secondary: #4a5568;
+  --color-secondary-hover: #2d3748;
+
+  --color-danger: #c0392b;
+  --color-danger-hover: #96281b;
+  --color-danger-light: #fdecea;
+
+  --color-profit: #1a6b3a;
+  --color-profit-bg: #e8f5ee;
+  --color-loss: #c0392b;
+  --color-loss-bg: #fdecea;
+
+  --color-cost: #2563eb;
+  --color-cost-bg: #eff6ff;
+  --color-sales: #7c3aed;
+  --color-sales-bg: #f5f3ff;
+
+  --color-text: #1a202c;
+  --color-muted: #718096;
+
+  --radius: 16px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --shadow-hover: 0 6px 24px rgba(0,0,0,0.12);
+
+  --font-main: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+/* --- Reset & Base Styles --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* --- App Container --- WIDER: 1600px max */
+.app-container {
+  max-width: 1600px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 40px 80px;
+}
+
+/* --- Header --- */
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, #2d8c58 100%);
+  color: white;
+  padding: 36px 48px;
+  border-radius: var(--radius);
+  margin-bottom: 28px;
+  box-shadow: 0 4px 20px rgba(26, 107, 58, 0.3);
+}
+
+.header-icon {
+  font-size: 56px;
+  line-height: 1;
+}
+
+.app-header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.app-header p {
+  font-size: 1.05rem;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+/* --- Card --- */
+.card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 36px 40px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 26px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.badge {
+  margin-left: auto;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 4px 14px;
+  border-radius: 20px;
+}
+
+/* --- Form Grid --- */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+  margin-bottom: 26px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-group input {
+  padding: 14px 18px;
+  border: 1.5px solid var(--color-border);
+  border-radius: 10px;
+  font-family: var(--font-main);
+  font-size: 1rem;
+  color: var(--color-text);
+  background: #fafbfc;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+.form-group input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(26, 107, 58, 0.12);
+  background: var(--color-white);
+}
+
+.form-group input::placeholder {
+  color: #b0bec5;
+}
+
+/* --- Buttons --- */
+.form-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 13px 28px;
+  border: none;
+  border-radius: 10px;
+  font-family: var(--font-main);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+  box-shadow: 0 2px 8px rgba(26, 107, 58, 0.25);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+  box-shadow: 0 4px 14px rgba(26, 107, 58, 0.35);
+}
+
+.btn-secondary {
+  background: var(--color-white);
+  color: var(--color-secondary);
+  border: 1.5px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+  background: #f7f8fa;
+  border-color: var(--color-secondary);
+}
+
+.btn-delete {
+  background: var(--color-danger-light);
+  color: var(--color-danger);
+  font-size: 0.85rem;
+  padding: 8px 16px;
+  border: 1px solid #f5c6c2;
+}
+
+.btn-delete:hover {
+  background: var(--color-danger);
+  color: white;
+}
+
+/* --- Table --- */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+}
+
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  min-width: 900px;
+}
+
+.products-table thead {
+  background: #f7f9fb;
+}
+
+.products-table th {
+  padding: 15px 18px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-muted);
+  border-bottom: 2px solid var(--color-border);
+  white-space: nowrap;
+}
+
+.products-table td {
+  padding: 16px 18px;
+  border-bottom: 1px solid #f0f4f8;
+  font-family: var(--font-mono);
+  font-size: 0.93rem;
+  vertical-align: middle;
+}
+
+.product-name {
+  font-family: var(--font-main) !important;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.row-number {
+  font-family: var(--font-main) !important;
+  color: var(--color-muted);
+  font-size: 0.85rem;
+}
+
+.table-row:last-child td {
+  border-bottom: none;
+}
+
+.table-row:hover {
+  background: #fafbff;
+}
+
+.profit-positive {
+  color: var(--color-profit);
+  font-weight: 700;
+}
+
+.profit-negative {
+  color: var(--color-loss);
+  font-weight: 700;
+}
+
+/* --- Summary Section --- */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.summary-item {
+  padding: 26px 28px;
+  border-radius: 12px;
+  border: 1.5px solid transparent;
+}
+
+.summary-item.cost {
+  background: var(--color-cost-bg);
+  border-color: #bfdbfe;
+}
+
+.summary-item.sales {
+  background: var(--color-sales-bg);
+  border-color: #ddd6fe;
+}
+
+.summary-item.profit-good {
+  background: var(--color-profit-bg);
+  border-color: #a7f3d0;
+}
+
+.summary-item.profit-bad {
+  background: var(--color-loss-bg);
+  border-color: #fecaca;
+}
+
+.summary-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-muted);
+  margin-bottom: 10px;
+}
+
+.summary-value {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+
+.summary-item.profit-good .summary-value { color: var(--color-profit); }
+.summary-item.profit-bad .summary-value  { color: var(--color-loss); }
+.summary-item.cost .summary-value        { color: var(--color-cost); }
+.summary-item.sales .summary-value       { color: var(--color-sales); }
+
+.summary-sub {
+  font-size: 0.82rem;
+  color: var(--color-muted);
+}
+
+/* --- Empty State --- */
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--color-muted);
+}
+
+.empty-state span {
+  font-size: 64px;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.empty-state p {
+  font-size: 1.1rem;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 20px 16px 60px;
+  }
+
+  .app-header {
+    padding: 24px 20px;
+    gap: 14px;
+  }
+
+  .app-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .header-icon {
+    font-size: 40px;
+  }
+
+  .card {
+    padding: 24px 20px;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
