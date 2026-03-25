@@ -5,10 +5,15 @@ const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
-    const saved = sessionStorage.getItem('user');
-    return saved ? JSON.parse(saved) : null;
+    try {
+      const saved = sessionStorage.getItem('user');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
   });
 
+  // ✅ Login using backend API
   const login = async (username, password) => {
     try {
       const response = await api.post('/users/login', { username, password });
@@ -17,10 +22,12 @@ export function AuthProvider({ children }) {
       sessionStorage.setItem('user', JSON.stringify(userData));
       return { success: true, user: userData };
     } catch (error) {
-      return { success: false, error: 'Invalid username or password' };
+      const message = error.response?.data?.error || 'Invalid username or password';
+      return { success: false, error: message };
     }
   };
 
+  // ✅ Logout
   const logout = () => {
     setUser(null);
     sessionStorage.removeItem('user');

@@ -1,4 +1,4 @@
-package com.supermarket.backend.controllers;
+package com.supermarket.backend.controller;
 
 import com.supermarket.backend.model.User;
 import com.supermarket.backend.repository.UserRepository;
@@ -6,17 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = {
-        "http://localhost:5173",
-        "http://192.168.13.70:5173"
-})
+@CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired
@@ -25,39 +19,27 @@ public class UserController {
     // LOGIN
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> body) {
-        try {
-            String username = body.get("username");
-            String password = body.get("password");
 
-            Optional<User> userOpt = userRepository.findByUsername(username);
+        String username = body.get("username");
+        String password = body.get("password");
 
-            if (userOpt.isEmpty()) {
-                Map<String, String> error = new HashMap<>();
-                error.put("error", "Invalid username or password");
-                return ResponseEntity.status(401).body(error);
-            }
+        Optional<User> userOpt = userRepository.findByUsername(username);
 
-            User user = userOpt.get();
-
-            if (!user.getPassword().equals(password)) {
-                Map<String, String> error = new HashMap<>();
-                error.put("error", "Invalid username or password");
-                return ResponseEntity.status(401).body(error);
-            }
-
-            if (!user.isActive()) {
-                Map<String, String> error = new HashMap<>();
-                error.put("error", "Your account has been disabled");
-                return ResponseEntity.status(401).body(error);
-            }
-
-            return ResponseEntity.ok(user);
-
-        } catch (Exception e) {
-            Map<String, String> error = new HashMap<>();
-            error.put("error", "Server error: " + e.getMessage());
-            return ResponseEntity.status(500).body(error);
+        if (userOpt.isEmpty()) {
+            return ResponseEntity.status(401).body(Map.of("error", "Invalid username or password"));
         }
+
+        User user = userOpt.get();
+
+        if (!user.getPassword().equals(password)) {
+            return ResponseEntity.status(401).body(Map.of("error", "Invalid username or password"));
+        }
+
+        if (!user.isActive()) {
+            return ResponseEntity.status(401).body(Map.of("error", "Account disabled"));
+        }
+
+        return ResponseEntity.ok(user);
     }
 
     // GET all users
@@ -76,21 +58,25 @@ public class UserController {
     // UPDATE user
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody User updated) {
-        try {
-            User user = userRepository.findById(id).orElseThrow();
-            user.setFullName(updated.getFullName());
-            user.setUsername(updated.getUsername());
-            user.setRole(updated.getRole());
-            user.setActive(updated.isActive());
 
-            if (updated.getPassword() != null && !updated.getPassword().isEmpty()) {
-                user.setPassword(updated.getPassword());
-            }
+        Optional<User> optionalUser = userRepository.findById(id);
 
-            return ResponseEntity.ok(userRepository.save(user));
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body(e.getMessage());
+        if (optionalUser.isEmpty()) {
+            return ResponseEntity.status(404).body("User not found");
         }
+
+        User user = optionalUser.get();
+
+        user.setFullName(updated.getFullName());
+        user.setUsername(updated.getUsername());
+        user.setRole(updated.getRole());
+        user.setActive(updated.isActive());
+
+        if (updated.getPassword() != null && !updated.getPassword().isEmpty()) {
+            user.setPassword(updated.getPassword());
+        }
+
+        return ResponseEntity.ok(userRepository.save(user));
     }
 
     // DELETE user
