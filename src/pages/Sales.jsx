@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useStore } from '../context/StoreContext';
-import { Card, Badge, fmt } from '../components/UI';
+import { Card, Badge, fmt } from '../Components/UI';
 
 export default function Sales() {
   const { transactions } = useStore();
@@ -86,3 +86,4 @@ function StatCard({ label, value, green }) {
     </div>
   );
 }
+

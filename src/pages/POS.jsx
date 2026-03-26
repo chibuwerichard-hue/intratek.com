@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useStore } from '../context/StoreContext';
-import { Badge, Btn, fmt } from '../components/UI';
+import { Badge, Btn, fmt } from '../Components/UI';
 
 const CATEGORIES = ['All', 'Dairy', 'Bakery', 'Produce', 'Beverages', 'Frozen', 'Meat', 'Pantry', 'Snacks'];
 
@@ -259,3 +259,4 @@ function ReceiptRow({ label, val }) {
     </div>
   );
 }
+

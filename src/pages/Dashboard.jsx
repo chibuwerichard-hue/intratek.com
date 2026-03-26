@@ -1,5 +1,5 @@
 import { useStore } from '../context/StoreContext';
-import { MetricCard, Card, Alert, Badge, fmt, fmtPct } from '../components/UI';
+import { MetricCard, Card, Alert, Badge, fmt, fmtPct } from '../Components/UI';
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 const CATEGORY_COLORS = {
@@ -246,3 +246,4 @@ function LegendDot({ color, label }) {
     </div>
   );
 }
+

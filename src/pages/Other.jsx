@@ -1,4 +1,4 @@
-import { Card, Btn, Input, Select } from '../components/UI';
+import { Card, Btn, Input, Select } from '../Components/UI';
 
 export function Settings() {
   return (
@@ -125,3 +125,4 @@ export function Receipts() {
     </div>
   );
 }
+

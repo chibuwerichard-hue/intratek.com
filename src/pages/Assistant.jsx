@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useStore } from '../context/StoreContext';
-import { Card } from '../components/UI';
+import { Card } from '../Components/UI';
 
 const QUICK_PROMPTS = [
   "What were the best selling products this week?",
@@ -226,3 +226,4 @@ Respond concisely and practically. Use bullet points for lists. Provide specific
     </div>
   );
 }
+

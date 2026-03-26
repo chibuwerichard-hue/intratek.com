@@ -1,5 +1,5 @@
 import { useStore } from '../context/StoreContext';
-import { Card, Alert } from '../components/UI';
+import { Card, Alert } from '../Components/UI';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, ReferenceLine } from 'recharts';
 
 export default function Forecast() {
@@ -237,3 +237,4 @@ function UrgencyBadge({ level }) {
     </span>
   );
 }
+

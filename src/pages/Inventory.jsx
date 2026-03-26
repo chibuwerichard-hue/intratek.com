@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useStore } from '../context/StoreContext';
-import { Badge, Btn, Card, Alert, Input, Select, fmt } from '../components/UI';
+import { Badge, Btn, Card, Alert, Input, Select, fmt } from '../Components/UI';
 
 const CATEGORIES = ['Dairy', 'Bakery', 'Produce', 'Beverages', 'Frozen', 'Meat', 'Pantry', 'Snacks'];
 
@@ -218,3 +218,4 @@ function ActionBtn({ children, onClick, color }) {
     }}>{children}</button>
   );
 }
+

@@ -1,5 +1,5 @@
 import { useStore } from '../context/StoreContext';
-import { MetricCard, Card, Badge, fmt } from '../components/UI';
+import { MetricCard, Card, Badge, fmt } from '../Components/UI';
 import { BarChart, Bar, AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 
 export default function Analytics() {
@@ -220,3 +220,4 @@ function LossCard({ label, value, icon, color, textColor }) {
     </div>
   );
 }
+
