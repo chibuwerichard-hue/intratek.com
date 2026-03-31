@@ -11,7 +11,6 @@ export function StoreProvider({ children }) {
   const [activeView, setActiveView] = useState('dashboard');
   const [error, setError] = useState(null);
 
-  // ✅ Fetch products from backend on load
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -30,7 +29,6 @@ export function StoreProvider({ children }) {
     }
   };
 
-  // ✅ Add product to backend
   const addProduct = useCallback(async (product) => {
     try {
       const res = await api.post('/products', product);
@@ -42,7 +40,6 @@ export function StoreProvider({ children }) {
     }
   }, []);
 
-  // ✅ Update product in backend
   const updateProduct = useCallback(async (id, updates) => {
     try {
       const res = await api.put(`/products/${id}`, updates);
@@ -50,13 +47,11 @@ export function StoreProvider({ children }) {
       return { success: true };
     } catch (err) {
       console.error('Failed to update product:', err);
-      // Update locally if backend fails
       setProducts(prev => prev.map(p => p.id === id ? { ...p, ...updates } : p));
       return { success: false };
     }
   }, []);
 
-  // ✅ Delete product from backend
   const deleteProduct = useCallback(async (id) => {
     try {
       await api.delete(`/products/${id}`);
@@ -68,7 +63,6 @@ export function StoreProvider({ children }) {
     }
   }, []);
 
-  // ✅ Add item to cart
   const addToCart = useCallback((productId) => {
     setCart(prev => {
       const existing = prev.find(c => c.productId === productId);
@@ -87,7 +81,6 @@ export function StoreProvider({ children }) {
     });
   }, [products]);
 
-  // ✅ Update cart quantity
   const updateCartQty = useCallback((productId, delta) => {
     setCart(prev => {
       const updated = prev.map(c =>
@@ -97,17 +90,16 @@ export function StoreProvider({ children }) {
     });
   }, []);
 
-  // ✅ Clear cart
   const clearCart = useCallback(() => setCart([]), []);
 
-  // ✅ Checkout - save transaction and update stock
-  const checkout = useCallback(async (paymentMethod) => {
+  // ✅ FIXED: checkout is now synchronous - no async/await issues
+  const checkout = useCallback((paymentMethod) => {
     const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
     const tax = subtotal * 0.08;
     const txn = {
       id: `TXN-${Date.now()}`,
       timestamp: new Date().toISOString(),
-      items: cart,
+      items: [...cart],
       subtotal,
       tax,
       discount: 0,
@@ -115,21 +107,24 @@ export function StoreProvider({ children }) {
       paymentMethod,
     };
 
-    // Update stock in backend
-    for (const cartItem of cart) {
-      const product = products.find(p => p.id === cartItem.productId);
-      if (product) {
-        const newQty = Math.max(0, product.quantity - cartItem.qty);
-        await updateProduct(cartItem.productId, { ...product, quantity: newQty });
+    // ✅ Update stock locally immediately
+    setProducts(prev => prev.map(p => {
+      const cartItem = cart.find(c => c.productId === p.id);
+      if (cartItem) {
+        const newQty = Math.max(0, p.quantity - cartItem.qty);
+        // Update in backend silently
+        api.put(`/products/${p.id}`, { ...p, quantity: newQty }).catch(console.error);
+        return { ...p, quantity: newQty };
       }
-    }
+      return p;
+    }));
 
+    // ✅ Save transaction to local state
     setTransactions(prev => [txn, ...prev]);
     setCart([]);
     return txn;
-  }, [cart, products, updateProduct]);
+  }, [cart]);
 
-  // ✅ Computed values
   const lowStockProducts = products.filter(p => p.quantity <= 5);
   const today = new Date().toDateString();
   const todayTransactions = transactions.filter(
