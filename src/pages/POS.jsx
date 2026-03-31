@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { useStore } from '../context/StoreContext';
 import { fmt } from '../Components/UI';
 
@@ -36,7 +36,7 @@ export default function POS() {
     <div style={{ display: 'flex', flex: 1, height: '100%', overflow: 'hidden', background: '#f7faf7' }}>
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', padding: '20px', gap: '14px' }}>
         <div style={{ flex: 1, position: 'relative' }}>
-          <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#9ca3af', fontSize: '14px' }}>🔍</span>
+          <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#9ca3af', fontSize: '14px' }}>ðŸ”</span>
           <input
             placeholder="Search products or scan barcode..."
             value={search}
@@ -80,7 +80,7 @@ export default function POS() {
         <div style={{ flex: 1, overflowY: 'auto', padding: '8px' }}>
           {cart.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '40px 20px', color: '#9ca3af', fontSize: '13px' }}>
-              <div style={{ fontSize: '32px', marginBottom: '8px' }}>🛒</div>
+              <div style={{ fontSize: '32px', marginBottom: '8px' }}>ðŸ›’</div>
               Tap a product to add it to the order
             </div>
           ) : cart.map(item => (
@@ -90,7 +90,7 @@ export default function POS() {
                 <div style={{ fontSize: '11px', color: '#6b7c6e' }}>{fmt(item.price)} each</div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <button onClick={() => updateCartQty(item.productId, -1)} style={{ width: '24px', height: '24px', borderRadius: '6px', border: '1px solid #d1d5db', background: '#fff', cursor: 'pointer', fontWeight: 700 }}>−</button>
+                <button onClick={() => updateCartQty(item.productId, -1)} style={{ width: '24px', height: '24px', borderRadius: '6px', border: '1px solid #d1d5db', background: '#fff', cursor: 'pointer', fontWeight: 700 }}>âˆ’</button>
                 <span style={{ fontSize: '13px', fontWeight: 600, minWidth: '20px', textAlign: 'center' }}>{item.qty}</span>
                 <button onClick={() => updateCartQty(item.productId, 1)} style={{ width: '24px', height: '24px', borderRadius: '6px', border: '1px solid #d1d5db', background: '#fff', cursor: 'pointer', fontWeight: 700 }}>+</button>
               </div>
@@ -126,7 +126,7 @@ export default function POS() {
             color: '#fff', border: 'none', borderRadius: '9px', fontSize: '14px', fontWeight: 700,
             cursor: cart.length === 0 ? 'not-allowed' : 'pointer',
           }}>
-            Process {payMethod} — {fmt(total)}
+            Process {payMethod} â€” {fmt(total)}
           </button>
         </div>
       </div>
@@ -180,7 +180,7 @@ function ReceiptView({ receipt, onNew }) {
         <div style={{ background: '#fff', border: '1px solid #e8f0e9', borderRadius: '14px', padding: '28px 24px', fontFamily: 'monospace' }}>
           <div style={{ textAlign: 'center', paddingBottom: '18px', borderBottom: '2px dashed #e8f0e9' }}>
             <div style={{ fontSize: '22px', fontWeight: 700, color: '#0d1f0e' }}>FreshMart</div>
-            <div style={{ fontSize: '12px', color: '#6b7c6e', marginTop: '4px' }}>123 Main Street • Springfield</div>
+            <div style={{ fontSize: '12px', color: '#6b7c6e', marginTop: '4px' }}>123 Main Street â€¢ Springfield</div>
             <div style={{ fontSize: '12px', color: '#6b7c6e' }}>{now.toLocaleDateString()} {now.toLocaleTimeString()}</div>
             <div style={{ fontSize: '11px', color: '#9ca3af', marginTop: '4px' }}>Receipt #{receipt.id}</div>
           </div>
@@ -189,9 +189,9 @@ function ReceiptView({ receipt, onNew }) {
               <div key={i} style={{ marginBottom: '8px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px' }}>
                   <span style={{ fontWeight: 600 }}>{item.name}</span>
-                  <span style={{ fontWeight: 600' }}>{fmt(item.price * item.qty)}</span>
+                  <span style={{ fontWeight: 600 }}>{fmt(item.price * item.qty)}</span>
                 </div>
-                <div style={{ fontSize: '11px', color: '#9ca3af' }}>{item.qty} × {fmt(item.price)}</div>
+                <div style={{ fontSize: '11px', color: '#9ca3af' }}>{item.qty} Ã— {fmt(item.price)}</div>
               </div>
             ))}
           </div>
@@ -208,8 +208,8 @@ function ReceiptView({ receipt, onNew }) {
           </div>
         </div>
         <div style={{ display: 'flex', gap: '10px', marginTop: '16px', justifyContent: 'center' }}>
-          <button onClick={onNew} style={{ padding: '10px 20px', background: '#2d7a35', color: '#fff', border: 'none', borderRadius: '8px', fontSize: '13px', fontWeight: 600, cursor: 'pointer' }}>🛒 New Sale</button>
-          <button onClick={handlePrint} style={{ padding: '10px 20px', background: '#fff', color: '#2d7a35', border: '1px solid #2d7a35', borderRadius: '8px', fontSize: '13px', fontWeight: 600, cursor: 'pointer' }}>🖨️ Print Receipt</button>
+          <button onClick={onNew} style={{ padding: '10px 20px', background: '#2d7a35', color: '#fff', border: 'none', borderRadius: '8px', fontSize: '13px', fontWeight: 600, cursor: 'pointer' }}>ðŸ›’ New Sale</button>
+          <button onClick={handlePrint} style={{ padding: '10px 20px', background: '#fff', color: '#2d7a35', border: '1px solid #2d7a35', borderRadius: '8px', fontSize: '13px', fontWeight: 600, cursor: 'pointer' }}>ðŸ–¨ï¸ Print Receipt</button>
         </div>
       </div>
     </div>
