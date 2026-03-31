@@ -63,19 +63,8 @@ export default function Login() {
           <span style={{ fontSize: '36px' }}>🛒</span>
         </div>
 
-        <h1 style={{ color: '#ffffff', fontSize: '28px', fontWeight: '700', margin: '0 0 6px' }}>FreShmart POS</h1>
-        <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '13px', marginBottom: '20px', letterSpacing: '0.5px', textTransform: 'uppercase' }}></p>
-
-        {/* Role badges */}
-        <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginBottom: '28px' }}>
-          {[
-            { role: 'Admin', color: '#c53030', bg: '#fff5f5' },
-            { role: 'Supervisor', color: '#975a16', bg: '#fffbeb' },
-            { role: 'Teller', color: '#276749', bg: '#f0fff4' },
-          ].map(r => (
-            <span key={r.role} style={{ background: r.bg, color: r.color, padding: '4px 12px', borderRadius: '20px', fontSize: '11px', fontWeight: 700 }}>{r.role}</span>
-          ))}
-        </div>
+        <h1 style={{ color: '#ffffff', fontSize: '28px', fontWeight: '700', margin: '0 0 6px' }}>FreshMart POS</h1>
+        <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '13px', marginBottom: '28px', letterSpacing: '0.5px', textTransform: 'uppercase' }}>Authorized Personnel Only</p>
 
         {/* Username */}
         <div style={{ textAlign: 'left', marginBottom: '16px' }}>
@@ -128,13 +117,9 @@ export default function Login() {
           {loading ? 'Signing in...' : 'Sign In →'}
         </button>
 
-        {/* Credentials hint */}
-        <div style={{ marginTop: '20px', padding: '12px', background: 'rgba(255,255,255,0.05)', borderRadius: '10px', fontSize: '11px', color: 'rgba(255,255,255,0.4)', textAlign: 'left' }}>
-          <div style={{ marginBottom: '6px', fontWeight: 700, color: 'rgba(255,255,255,0.5)' }}>DEFAULT CREDENTIALS</div>
-          <div>👑 Admin: admin / admin123</div>
-          <div>👔 Supervisor: supervisor1 / super123</div>
-          <div>💳 Teller: teller1 / teller123</div>
-        </div>
+        <p style={{ color: 'rgba(255,255,255,0.25)', fontSize: '11px', marginTop: '20px' }}>
+          Contact your administrator if you need access.
+        </p>
       </div>
     </div>
   );
